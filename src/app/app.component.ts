@@ -22,12 +22,23 @@ export class AppComponent {
   animals:string[] = ['a','b','c','d','e','f','g']
 
   person: IPerson = {
-    name: 'a',
-    lastName: 'b'
+    name: 'Luis',
+    lastName: 'Arce',
+    age: 50
   }
+
+students:number[] = [1,2,3,4,5,6]
+parents:number[] = [7,8,9,10]
 
 constructor(){
   console.log('subtract', this.subtract(8,4))
+
+  const{ name, age} = this.person
+  console.log('desestructuracion:', name, age)
+
+let both = [...this.students, ...this.parents]
+console.log('spread operator', both)
+console.log('Rest operator:', this.sum1(2,4,6))
 
   console.log('MAP:', this.animals.map( (animal:string) => ( animal + 'new')    ))
   console.log('FOREACH:', this.animals.forEach( (animal) => ( animal + 'new')    ))
@@ -35,6 +46,12 @@ constructor(){
   console.log('FILTER', this.animals.filter((animal)=>  animal === 'z'))
   console.log('INDEXOF', this.animals.indexOf('c'))
   
+}
+
+public sum1(...person:number[]){
+  return person.reduce(
+    (acumulador, valorActual) => (acumulador + valorActual), 10
+  )
 }
 
 public sum(num1: number, num2:number): number{
