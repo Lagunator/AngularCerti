@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { UserCardComponent } from './user-card/user-card.component';
+import { CalculatorComponent } from './calculator/calculator.component';
+import { HistoryCalculatorComponent } from './history-calculator/history-calculator.component';
 
 interface IPerson {
   name:string
@@ -11,12 +13,14 @@ interface IPerson {
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, UserCardComponent],
+  imports: [RouterOutlet, UserCardComponent, CalculatorComponent, HistoryCalculatorComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  result:number = 0;
   title = 'AngularCerti';
+  history: string[] = ['','',''];
   sumNumber = 5;
   evenPersons: number[] = [];
 
@@ -83,5 +87,14 @@ ngOnInit(): void {
 public receiveData(data:any){
   console.log('Print in father component: ', data)
 }
+
+public onResult(event:any){
+  console.log('event from child:', event)
+  this.result = event ?? 0
+  this.history.pop(); 
+  this.history.unshift(`Resultado: ${this.result}`); 
+
+}
+
 
 }

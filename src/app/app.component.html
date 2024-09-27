@@ -235,7 +235,14 @@
       [email]="'juan@gmail.com'"
       (sendData)="receiveData($event)"
       >
-      </user-card>  
+      </user-card>
+      <p>RESULT:  {{result}}</p>
+      <calculator 
+      (sum)="onResult($event)" 
+      (mul)="onResult($event)" 
+      (reset)="onResult($event)">
+      </calculator>
+      <history-calculator [history]="history"></history-calculator>
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
