@@ -80,4 +80,8 @@ public getArray(): number[] {
 ngOnInit(): void {
   this.evenPersons = this.getArray(); // Asignar el resultado de getArray() a evenPersons
 }
+public receiveData(data:any){
+  console.log('Print in father component: ', data)
+}
+
 }
