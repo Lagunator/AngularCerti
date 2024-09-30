@@ -4,17 +4,18 @@ import { UserCardComponent } from './user-card/user-card.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { HistoryCalculatorComponent } from './history-calculator/history-calculator.component';
 import { CommonModule } from '@angular/common';
+import {PersonaComponent} from "./persona/persona.component";
 
-interface IPerson {
-  name:string
-  lastName: string
-  age?: number
+export interface IPerson {
+  name: string;
+  gender: 'male' | 'female';
+  age: number;
 }
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, UserCardComponent, CalculatorComponent, HistoryCalculatorComponent, CommonModule],
+  imports: [RouterOutlet, UserCardComponent, CalculatorComponent, HistoryCalculatorComponent, CommonModule, PersonaComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
@@ -27,11 +28,37 @@ export class AppComponent {
 
   animals:string[] = ['a','b','c','d','e','f','g']
 
-  person: IPerson = {
-    name: 'Luis',
-    lastName: 'Arce',
-    age: 50
+  persons: IPerson[] = [
+    { name: 'Mauri', gender: 'female', age: 29 },
+    { name: 'Ignacio', gender: 'male', age: 10 },
+    { name: 'Ale', gender: 'female', age: 22 },
+    { name: 'Luisa', gender: 'female', age: 21 },
+  ];
+
+  get totalFemales(): number {
+    return this.persons.filter(person => person.gender === 'female').length;
   }
+
+  get totalMales(): number {
+    return this.persons.filter(person => person.gender === 'male').length;
+  }
+
+  get totalDiscounts(): number {
+    return this.persons.filter(person => person.age > 18).length;
+  }
+
+  deletePersonsWithDiscount(): void {
+    this.persons = this.persons.filter(person => person.age <= 18);
+  }
+
+  hasDiscount(person: IPerson): boolean {
+    return person.age > 18;
+  }
+  
+
+
+
+  
 
 students:number[] = [1,2,3,4,5,6]
 parents:number[] = [7,8,9,10]
@@ -43,8 +70,6 @@ var3 = 'hola'
 constructor(){
   console.log('subtract', this.subtract(8,4))
 
-  const{ name, age} = this.person
-  console.log('desestructuracion:', name, age)
 
 let both = [...this.students, ...this.parents]
 console.log('spread operator', both)

@@ -1,0 +1,6 @@
+<div class="person-card">
+    <p>Nombre: {{ person.name }}</p>
+    <p>Género: {{ person.gender }}</p>
+    <p>Edad: {{ person.age }}</p>
+    <p *ngIf="hasDiscount" class="discount-label">Con descuento</p>
+  </div>
