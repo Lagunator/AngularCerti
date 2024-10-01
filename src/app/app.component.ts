@@ -26,6 +26,8 @@ export class AppComponent {
   sumNumber = 5;
   evenPersons: number[] = [];
 
+  userCardCreated: boolean = true
+
   animals:string[] = ['a','b','c','d','e','f','g']
 
   persons: IPerson[] = [
@@ -72,11 +74,11 @@ constructor(){
 
 
 let both = [...this.students, ...this.parents]
-console.log('spread operator', both)
-console.log('Rest operator:', this.sum1(2,4,6))
+//console.log('spread operator', both)
+//console.log('Rest operator:', this.sum1(2,4,6))
 
-console.log('Nullish Coalesing:',  this.var2 ?? this.var3  )
-console.log('OR:', this.var2 || this.var1)
+//console.log('Nullish Coalesing:',  this.var2 ?? this.var3  )
+//console.log('OR:', this.var2 || this.var1)
 
 
   console.log('MAP:', this.animals.map( (animal:string) => ( animal + 'new')    ))
