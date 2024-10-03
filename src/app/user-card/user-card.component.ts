@@ -1,8 +1,8 @@
 import { FormsModule } from "@angular/forms";
 import {
   AfterContentInit,
-  afterNextRender,
-  afterRender,
+  AfterContentChecked,
+  AfterViewChecked,
   AfterViewInit,
   Component,
   DoCheck,
@@ -74,9 +74,18 @@ export class UserCardComponent
     console.log('NG AFTER VIEW INIT')
     console.log('BUTTON TEST', this.buttonTest)   
     if(this.buttonTest){
-      this.buttonTest.nativeElement.textContent = 'button Test in ngAfterViewInit'
+      this.buttonTest.nativeElement.textContent = 'button Test in OnInit'
     }
   }
+
+  ngAfterContentChecked(): void {
+    console.log('AFTER CONTENT CHECKED')
+  }
+
+  ngAfterViewChecked(): void {
+    console.log('NG AFTER VIEW CHECKED')
+  }
+
   public onSendData() {
     //console.log('onSendData in child')
     this.sendData.emit("Hi from child component");
