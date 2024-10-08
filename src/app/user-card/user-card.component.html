@@ -1,5 +1,7 @@
 <div class="user-card">
-    <p>USER CARD COMPONENT</p>
+    <p [ngStyle]="{
+        'background-color': password === 'red' ? 'red' : 'yellow' ,
+    }">USER CARD COMPONENT</p>
     <p>INPUT NAME: {{ name }}</p>
     <p>INPUT email: {{ email }}</p>
     <button #buttonShow (click)="showButton = !showButton">show button</button>
@@ -17,3 +19,4 @@
     'user-card-black': password === 'hola' 
 }"> 
 */
+
