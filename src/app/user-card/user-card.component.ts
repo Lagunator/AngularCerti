@@ -1,4 +1,5 @@
 import { FormsModule } from "@angular/forms";
+import { CommonModule } from "@angular/common";
 import {
   AfterContentInit,
   AfterContentChecked,
@@ -16,10 +17,11 @@ import {
   SimpleChanges,
   ViewChild,
 } from "@angular/core";
+
 @Component({
   selector: "user-card",
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: "./user-card.component.html",
   styleUrl: "./user-card.component.scss",
 })
@@ -37,7 +39,7 @@ export class UserCardComponent
   @Output() sendData = new EventEmitter()
   @ViewChild('buttonTest', { static: false }) buttonTest!: ElementRef
   @ViewChild('buttonShow', { static: true }) buttonShow!: ElementRef
-  password: string = "";
+  password: string = "password";
   showButton:boolean = true
 
   constructor() {
