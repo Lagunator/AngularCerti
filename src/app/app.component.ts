@@ -1,131 +1,108 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { UserCardComponent } from './user-card/user-card.component';
-import { CalculatorComponent } from './calculator/calculator.component';
-import { HistoryCalculatorComponent } from './history-calculator/history-calculator.component';
-import { CommonModule } from '@angular/common';
-import {PersonaComponent} from "./persona/persona.component";
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
+import { UserCardComponent } from "./user-card/user-card.component";
+import { CalculatorComponent } from "./calculator/calculator.component";
+import { CommonModule } from "@angular/common";
+import { CounterComponent } from "./counter/counter.component";
+import { filter, from, map, tap } from "rxjs";
 
-export interface IPerson {
+interface IPerson {
   name: string;
-  gender: 'male' | 'female';
-  age: number;
+  lastName: string;
+  age?: number;
 }
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, UserCardComponent, CalculatorComponent, HistoryCalculatorComponent, CommonModule, PersonaComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  imports: [
+    RouterOutlet,
+    UserCardComponent,
+    CalculatorComponent,
+    CommonModule,
+    CounterComponent,
+  ],
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.scss",
 })
+
 export class AppComponent {
-  result:number = 0;
-  title = 'AngularCerti';
-  history: string[] = ['','',''];
-  sumNumber = 5;
-  evenPersons: number[] = [];
-
-  userCardCreated: boolean = true
-
-  users = [{ name: 'abc', 'email': 'abc@gmail.com' }, { name: 'dfg', 'email': 'dfg@gmail.com' }]
-  selectedUser:any = this.users[0];
-
-  animals:string[] = ['a','b','c','d','e','f','g']
-
-  persons: IPerson[] = [
-    { name: 'Mauri', gender: 'female', age: 29 },
-    { name: 'Ignacio', gender: 'male', age: 10 },
-    { name: 'Ale', gender: 'female', age: 22 },
-    { name: 'Luisa', gender: 'female', age: 21 },
+  users = [
+    { name: "abc", email: "abc@gmail.com" },
+    { name: "dfg", email: "dfg@gmail.com" },
   ];
+  selectedUser: any = this.users[0];
 
-  get totalFemales(): number {
-    return this.persons.filter(person => person.gender === 'female').length;
+  userCardCreated: boolean = true;
+  result: number = 0;
+  animals: string[] = ["a", "b", "c", "d", "e", "f", "g"];
+
+  person: IPerson = {
+    name: "Juan",
+    lastName: "Perez",
+    age: 25,
+  };
+  students: number[] = [1, 2, 3, 4, 5, 6];
+  parents: number[] = [7, 8, 9, 10];
+  var1 = 0;
+  var2 = null;
+  var3 = "hola";
+  youtube = from([1, 2, 3, 4, 5, 6]);
+  title: any;
+
+  constructor() {
+    const { name, age } = this.person;
+    let both = [...this.students, ...this.parents];
+    this.youtube.subscribe((res) => {
+      console.log("SUSCRIBER 1: ", res);
+    });
+  }
+  public sum(...persons: number[]) {
+    //return persons[0] + persons[1]
+    return persons.reduce(
+      (acumulador, valorActual) => acumulador + valorActual,
+      10
+    );
+  }
+  addVideo() {
+    this.youtube
+      .pipe(
+        map((res: number) => {
+          //console.log("MAP OPERATOER RXJS: ", res);
+          if (res % 2 === 0) {
+            return res;
+          } else {
+            return null
+          }
+        }),
+        tap((res)  => {console.log('VALUE: ', res)}),
+        filter((res: number | null) => res !== null),
+      )
+      .subscribe((res) => {
+        console.log("SUSCRIBER 2: ", res);
+      });
+  }
+  public sum2(num1: number, num2: number): number {
+    return num1 + num2;
+  }
+  private subtract(num1: number, num2: number): number {
+    return num1 - num2;
   }
 
-  get totalMales(): number {
-    return this.persons.filter(person => person.gender === 'male').length;
+  public getArray(): void {
+    const persons: number[] = [1, 2, 3, 4, 5];
+    for (let i = 0; i < persons.length; i++) {
+      //console.log('person =', persons[i])
+    }
   }
 
-  get totalDiscounts(): number {
-    return this.persons.filter(person => person.age > 18).length;
-  }
-
-  deletePersonsWithDiscount(): void {
-    this.persons = this.persons.filter(person => person.age <= 18);
-  }
-
-  hasDiscount(person: IPerson): boolean {
-    return person.age > 18;
-  }
-  
-
-
-
-  
-
-students:number[] = [1,2,3,4,5,6]
-parents:number[] = [7,8,9,10]
-
-var1 = 0
-var2 = null
-var3 = 'hola'
-
-constructor(){
-  console.log('subtract', this.subtract(8,4))
-
-
-let both = [...this.students, ...this.parents]
-//console.log('spread operator', both)
-//console.log('Rest operator:', this.sum1(2,4,6))
-
-//console.log('Nullish Coalesing:',  this.var2 ?? this.var3  )
-//console.log('OR:', this.var2 || this.var1)
-
-
-  console.log('MAP:', this.animals.map( (animal:string) => ( animal + 'new')    ))
-  console.log('FOREACH:', this.animals.forEach( (animal) => ( animal + 'new')    ))
-  console.log('FIND', this.animals.find((animal)=>  animal === 'z'))
-  console.log('FILTER', this.animals.filter((animal)=>  animal === 'z'))
-  console.log('INDEXOF', this.animals.indexOf('c'))
-  
+public receiveData(data: any) {
+  console.log("Print in father component: ", data);
 }
 
-public sum1(...person:number[]){
-  return person.reduce(
-    (acumulador, valorActual) => (acumulador + valorActual), 10
-  )
+public onResult(event: any) {
+  console.log("event from child:", event);
+  this.result = event ?? 0;
 }
-
-public sum(num1: number, num2:number): number{
-  return num1 + 2
-}
-
-private subtract(num1: number, num2: number):number{
-  return num1 - num2
-}
-
-public getArray(): number[] {
-  const person: number[] = [1, 2, 3, 4, 5];
-  return person.filter(p => p % 2 === 0); // Filtra solo los números pares
-}
-
-// Se ejecuta al inicializar el componente
-ngOnInit(): void {
-  this.evenPersons = this.getArray(); // Asignar el resultado de getArray() a evenPersons
-}
-public receiveData(data:any){
-  console.log('Print in father component: ', data)
-}
-
-public onResult(event:any){
-  console.log('event from child:', event)
-  this.result = event ?? 0
-  this.history.pop(); 
-  this.history.unshift(`Resultado: ${this.result}`); 
-
-}
-
 
 }
