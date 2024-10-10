@@ -1,108 +1,51 @@
-import { Component } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
-import { UserCardComponent } from "./user-card/user-card.component";
-import { CalculatorComponent } from "./calculator/calculator.component";
-import { CommonModule } from "@angular/common";
-import { CounterComponent } from "./counter/counter.component";
-import { filter, from, map, tap } from "rxjs";
+import { Component } from '@angular/core';
+import { SearchComponent } from './search/search.component';
+import { ListComponent } from './list/list.component';
+import { CardComponent } from './card/card.component';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { data } from './data'; 
 
-interface IPerson {
+export interface Person {
+  id: number;
   name: string;
-  lastName: string;
-  age?: number;
+  type: 'Student' | 'Professor';
+  score?: {
+    firstTestScore: number;
+    secondTestScore: number;
+    finalTestScore: number;
+  };
+  subject?: string;
+  address: string;
+  country: string;
+  province: string;
 }
 
 @Component({
-  selector: "app-root",
+  selector: 'app-root',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    UserCardComponent,
-    CalculatorComponent,
-    CommonModule,
-    CounterComponent,
-  ],
-  templateUrl: "./app.component.html",
-  styleUrl: "./app.component.scss",
+  imports: [CommonModule, FormsModule, SearchComponent, ListComponent, CardComponent],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
-
 export class AppComponent {
-  users = [
-    { name: "abc", email: "abc@gmail.com" },
-    { name: "dfg", email: "dfg@gmail.com" },
-  ];
-  selectedUser: any = this.users[0];
-
-  userCardCreated: boolean = true;
-  result: number = 0;
-  animals: string[] = ["a", "b", "c", "d", "e", "f", "g"];
-
-  person: IPerson = {
-    name: "Juan",
-    lastName: "Perez",
-    age: 25,
-  };
-  students: number[] = [1, 2, 3, 4, 5, 6];
-  parents: number[] = [7, 8, 9, 10];
-  var1 = 0;
-  var2 = null;
-  var3 = "hola";
-  youtube = from([1, 2, 3, 4, 5, 6]);
-  title: any;
-
-  constructor() {
-    const { name, age } = this.person;
-    let both = [...this.students, ...this.parents];
-    this.youtube.subscribe((res) => {
-      console.log("SUSCRIBER 1: ", res);
-    });
-  }
-  public sum(...persons: number[]) {
-    //return persons[0] + persons[1]
-    return persons.reduce(
-      (acumulador, valorActual) => acumulador + valorActual,
-      10
+  items: Person[] = data;  
+  filteredItems: Person[] = data;  
+  selectedItem: Person | null = null;  
+  searchQuery: string = '';  
+  searchItems(query: string) {
+    this.filteredItems = this.items.filter(item =>
+      item.name.toLowerCase().includes(query.toLowerCase())
     );
   }
-  addVideo() {
-    this.youtube
-      .pipe(
-        map((res: number) => {
-          //console.log("MAP OPERATOER RXJS: ", res);
-          if (res % 2 === 0) {
-            return res;
-          } else {
-            return null
-          }
-        }),
-        tap((res)  => {console.log('VALUE: ', res)}),
-        filter((res: number | null) => res !== null),
-      )
-      .subscribe((res) => {
-        console.log("SUSCRIBER 2: ", res);
-      });
+  showItem(item: Person) {
+    this.selectedItem = item;
   }
-  public sum2(num1: number, num2: number): number {
-    return num1 + num2;
-  }
-  private subtract(num1: number, num2: number): number {
-    return num1 - num2;
-  }
-
-  public getArray(): void {
-    const persons: number[] = [1, 2, 3, 4, 5];
-    for (let i = 0; i < persons.length; i++) {
-      //console.log('person =', persons[i])
+  deleteItem(itemId: number) {
+    this.items = this.items.filter(item => item.id !== itemId);
+    this.filteredItems = this.items; 
+    if (this.selectedItem && this.selectedItem.id === itemId) {
+      this.selectedItem = null; 
     }
   }
-
-public receiveData(data: any) {
-  console.log("Print in father component: ", data);
-}
-
-public onResult(event: any) {
-  console.log("event from child:", event);
-  this.result = event ?? 0;
-}
-
 }

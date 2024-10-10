@@ -1,5 +1,5 @@
-<user-card [name]="selectedUser.name" [email]="selectedUser.email" (sendData)="receiveData($event)">
-  <p>My HTML from father</p>
-  <button>My button from father</button>
-</user-card>
-<button (click)="addVideo()">add new video to youtube</button>
+<div class="container">
+  <app-search (search)="searchItems($event)"></app-search>
+  <app-list [items]="filteredItems" (showItem)="showItem($event)" (deleteItem)="deleteItem($event)"></app-list>
+  <app-card *ngIf="selectedItem" [item]="selectedItem"></app-card>
+</div>

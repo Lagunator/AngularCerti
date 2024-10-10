@@ -1,0 +1,60 @@
+.card-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .tab-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .tab-button {
+    padding: 10px 15px;
+    border: none;
+    background-color: #f1f1f1;
+    color: #333;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .tab-button.active {
+    background-color: #e8a961;
+    color: white;
+  }
+  
+  .tab-button:hover {
+    background-color: #0056b3;
+    color: white;
+  }
+  
+  .card-content {
+    background-color: #a7d7ea;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+  }
+  
+  .card-content p {
+    margin: 10px 0;
+  }
+  
+  .message-list {
+    margin-top: 10px;
+    padding-left: 20px;
+  }
+  
+  .message-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
