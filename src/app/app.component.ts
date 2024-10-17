@@ -1,10 +1,11 @@
 import { Component } from "@angular/core";
 import { RouterOutlet } from "@angular/router";
-import { UserCardComponent } from "./user-card/user-card.component";
-import { CalculatorComponent } from "./calculator/calculator.component";
 import { CommonModule } from "@angular/common";
-import { CounterComponent } from "./counter/counter.component";
 import { filter, from, map, tap } from "rxjs";
+import { AppColorsDirective } from "./app-colors.directive";
+import { CreateHtmlDirective } from "./create-html.directive";
+import {MatCardModule} from '@angular/material/card';
+import { MatButtonModule } from "@angular/material/button";
 
 interface IPerson {
   name: string;
@@ -17,15 +18,15 @@ interface IPerson {
   standalone: true,
   imports: [
     RouterOutlet,
-    UserCardComponent,
-    CalculatorComponent,
     CommonModule,
-    CounterComponent,
+    AppColorsDirective,
+    CreateHtmlDirective,
+    MatCardModule,
+    MatButtonModule
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.scss",
 })
-
 export class AppComponent {
   users = [
     { name: "abc", email: "abc@gmail.com" },
@@ -33,8 +34,10 @@ export class AppComponent {
   ];
   selectedUser: any = this.users[0];
 
-  userCardCreated: boolean = true;
+  userCardCreated: boolean = false;
+
   result: number = 0;
+  title: number = 10;
   animals: string[] = ["a", "b", "c", "d", "e", "f", "g"];
 
   person: IPerson = {
@@ -44,15 +47,17 @@ export class AppComponent {
   };
   students: number[] = [1, 2, 3, 4, 5, 6];
   parents: number[] = [7, 8, 9, 10];
+
   var1 = 0;
   var2 = null;
   var3 = "hola";
+
   youtube = from([1, 2, 3, 4, 5, 6]);
-  title: any;
 
   constructor() {
     const { name, age } = this.person;
     let both = [...this.students, ...this.parents];
+
     this.youtube.subscribe((res) => {
       console.log("SUSCRIBER 1: ", res);
     });
@@ -64,6 +69,7 @@ export class AppComponent {
       10
     );
   }
+
   addVideo() {
     this.youtube
       .pipe(
@@ -82,9 +88,11 @@ export class AppComponent {
         console.log("SUSCRIBER 2: ", res);
       });
   }
+
   public sum2(num1: number, num2: number): number {
     return num1 + num2;
   }
+
   private subtract(num1: number, num2: number): number {
     return num1 - num2;
   }
@@ -96,13 +104,30 @@ export class AppComponent {
     }
   }
 
-public receiveData(data: any) {
-  console.log("Print in father component: ", data);
-}
+  public getColor(value:any): void {
+    console.log("value: ", value);
+  }
+  //  function sumar(){
+  //   return 1 + 2;
+  //  }
 
-public onResult(event: any) {
-  console.log("event from child:", event);
-  this.result = event ?? 0;
-}
+  //  const suma = () => {
+  //   return 1 + 2
+  //  }
 
+  //  function resta(){
+  //   return 'hola' + a
+  //  }
+
+  // arrow functions
+  //  const resta = () => ('hola' + a)
+
+  public receiveData(data: any) {
+    console.log("Print in father component: ", data);
+  }
+
+  public onResult(event: any) {
+    console.log("event from child:", event);
+    this.result = event ?? 0;
+  }
 }
