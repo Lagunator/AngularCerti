@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { RouterOutlet, RouterLink } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { filter, from, map, tap } from "rxjs";
 import { AppColorsDirective } from "./app-colors.directive";
@@ -21,6 +21,7 @@ interface IPerson {
     CommonModule,
     AppColorsDirective,
     CreateHtmlDirective,
+    RouterLink,
     MatCardModule,
     MatButtonModule
   ],
