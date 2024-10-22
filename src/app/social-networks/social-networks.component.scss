@@ -1,0 +1,25 @@
+.social-networks {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .card {
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    text-align: center;
+  }
+  
+  button {
+    display: block;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  
+  .youtube { background-color: rgb(194, 4, 4); }
+  .facebook { background-color: rgb(70, 191, 231); }
+  .tiktok { background-color: rgb(41, 46, 206); }
+  .instagram { background-color: rgb(243, 64, 174); color: black; }
+  .whatsapp { background-color: rgb(0, 128, 60); }
+
+  

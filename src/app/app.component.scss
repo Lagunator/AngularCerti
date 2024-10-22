@@ -1,8 +1,10 @@
-.example-card {
-    max-width: 400px;
+/* app.component.css */
+.users {
+    display: flex;
+    flex-wrap: wrap;
   }
   
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
+  .user-wrapper {
+    width: 33%;
   }
+  
