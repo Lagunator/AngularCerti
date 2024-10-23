@@ -6,6 +6,7 @@ import { AppColorsDirective } from "./app-colors.directive";
 import { CreateHtmlDirective } from "./create-html.directive";
 import {MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from "@angular/material/button";
+import { FormsModule } from "@angular/forms";
 
 
 interface IPerson {
@@ -24,12 +25,16 @@ interface IPerson {
     CreateHtmlDirective,
     RouterLink,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.scss",
 })
 export class AppComponent {
+
+  name:string = 'testName'
+  lastName:string = ''
   users = [
     { name: "abc", email: "abc@gmail.com" },
     { name: "dfg", email: "dfg@gmail.com" },
@@ -134,5 +139,9 @@ export class AppComponent {
   }
   public onCalculator(){
     this.router.navigate(['cal'], {queryParams: {name: 'John', age: 20}})
+  }
+
+  onSubmit(data:any){
+    console.log('TEMPLATE DRIVEN FORM: ', data)
   }
 }
