@@ -1,11 +1,12 @@
 import { Component } from "@angular/core";
-import { RouterOutlet, RouterLink } from "@angular/router";
+import { RouterOutlet, RouterLink, Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { filter, from, map, tap } from "rxjs";
 import { AppColorsDirective } from "./app-colors.directive";
 import { CreateHtmlDirective } from "./create-html.directive";
 import {MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from "@angular/material/button";
+
 
 interface IPerson {
   name: string;
@@ -130,5 +131,8 @@ export class AppComponent {
   public onResult(event: any) {
     console.log("event from child:", event);
     this.result = event ?? 0;
+  }
+  public onCalculator(){
+    this.router.navigate(['cal'], {queryParams: {name: 'John', age: 20}})
   }
 }
