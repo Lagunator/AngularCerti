@@ -40,6 +40,9 @@
     </mat-card-content>
     <mat-card-actions>
       <button mat-button>LIKE</button>
+      <p>REACTIVE FORM</p>
+        <input type="text" [formControl]="scoreControl">
+        <button (click)="onPrintScore()">print score</button>
       <button mat-button>SHARE</button>
     </mat-card-actions>
   </mat-card>

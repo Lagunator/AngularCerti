@@ -6,7 +6,7 @@ import { AppColorsDirective } from "./app-colors.directive";
 import { CreateHtmlDirective } from "./create-html.directive";
 import {MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from "@angular/material/button";
-import { FormsModule } from "@angular/forms";
+import { FormControl, FormsModule, ReactiveFormsModule, Validators  } from "@angular/forms";
 
 
 interface IPerson {
@@ -26,12 +26,15 @@ interface IPerson {
     RouterLink,
     MatCardModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.scss",
 })
 export class AppComponent {
+
+  scoreControl = new FormControl<string>('asdasdasd', [Validators.required])
 
   name:string = 'testName'
   lastName:string = ''
@@ -94,6 +97,10 @@ export class AppComponent {
       .subscribe((res) => {
         console.log("SUSCRIBER 2: ", res);
       });
+
+      this.scoreControl.valueChanges.subscribe((res) => {
+        console.log('SCORE VALUE OBSERVABLE: ', res)
+      })
   }
 
   public sum2(num1: number, num2: number): number {
@@ -143,5 +150,9 @@ export class AppComponent {
 
   onSubmit(data:any){
     console.log('TEMPLATE DRIVEN FORM: ', data)
+  }
+
+  onPrintScore(){
+    console.log('SCORE: ', this.scoreControl.value)
   }
 }
