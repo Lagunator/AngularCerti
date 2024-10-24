@@ -6,7 +6,7 @@ import { AppColorsDirective } from "./app-colors.directive";
 import { CreateHtmlDirective } from "./create-html.directive";
 import {MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from "@angular/material/button";
-import { FormControl, FormsModule, ReactiveFormsModule, Validators  } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators   } from "@angular/forms";
 
 
 interface IPerson {
@@ -64,7 +64,10 @@ export class AppComponent {
 
   youtube = from([1, 2, 3, 4, 5, 6]);
 
-  constructor() {
+  studentForm!: FormGroup
+  constructor(
+    private router: Router, 
+    private formBuilder: FormBuilder) {
     const { name, age } = this.person;
     let both = [...this.students, ...this.parents];
 
@@ -101,6 +104,20 @@ export class AppComponent {
       this.scoreControl.valueChanges.subscribe((res) => {
         console.log('SCORE VALUE OBSERVABLE: ', res)
       })
+
+      this.studentForm = this.formBuilder.group({
+        name: ['', Validators.required],
+        score: [''],
+        school: [''],
+        proffesor: [''],
+        university: ['']
+      })
+      this.studentForm.valueChanges.subscribe((res) => {
+        console.log('FORM GROUP OBSERVABLE: ', res)
+      })
+    }
+    onSendData() {
+      console.log('FORM GROUP: ', this.studentForm)
   }
 
   public sum2(num1: number, num2: number): number {
