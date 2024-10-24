@@ -194,6 +194,9 @@ export class AppComponent {
   onSubmit(data:any){
     console.log('TEMPLATE DRIVEN FORM: ', data)
   }
+  print(){
+    console.log('FORM NAME: ', this.studentForm.get('name'))
+  }
 
   onPrintScore(){
     console.log('SCORE: ', this.scoreControl.value)
