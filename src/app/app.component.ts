@@ -6,13 +6,21 @@ import { AppColorsDirective } from "./app-colors.directive";
 import { CreateHtmlDirective } from "./create-html.directive";
 import {MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from "@angular/material/button";
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators   } from "@angular/forms";
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators   } from "@angular/forms";
 
 
 interface IPerson {
   name: string;
   lastName: string;
   age?: number;
+}
+
+interface IForm {
+  name: string
+  score: string
+  school: string
+  proffesor: string
+  university: string
 }
 
 @Component({
@@ -65,9 +73,12 @@ export class AppComponent {
   youtube = from([1, 2, 3, 4, 5, 6]);
 
   studentForm!: FormGroup
+  student2Form!: UntypedFormGroup
+
   constructor(
     private router: Router, 
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private untypedFormBuilder: UntypedFormBuilder) {
     const { name, age } = this.person;
     let both = [...this.students, ...this.parents];
 
@@ -112,6 +123,21 @@ export class AppComponent {
         proffesor: [''],
         university: ['']
       })
+
+      this.student2Form = this.untypedFormBuilder.group({
+        name: ['', Validators.required],
+        score: [''],
+        school: [''],
+        proffesor: [''],
+        university: ['']
+      })
+      /* this.studentForm = new FormGroup({
+        name: new FormControl<string>('sdasdasdasd', [Validators.required]),
+        score: new FormControl<string>('sdfsdfsdf'),
+        school: new FormControl<string>(''),
+        proffesor: new FormControl<string>(''),
+        university: new FormControl<string>('')
+      }) */
       this.studentForm.valueChanges.subscribe((res) => {
         console.log('FORM GROUP OBSERVABLE: ', res)
       })
