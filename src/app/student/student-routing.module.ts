@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ScoreComponent } from './score/score.component';
+import { ExamService } from './exam.service';
 const routes: Routes = [
   {
     path: '', component: ScoreComponent
@@ -11,7 +12,17 @@ const routes: Routes = [
   }
 ];
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  declarations: [
+    ScoreComponent,
+    ClassmateComponent,
+    AverageComponent
+  ],
+  imports: [
+    CommonModule,
+    StudentRoutingModule
+  ],
+  providers: [
+    ExamService
+  ]
 })
-export class StudentRoutingModule { }
+export class StudentModule { }
