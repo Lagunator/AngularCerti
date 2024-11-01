@@ -6,6 +6,7 @@ import { AppColorsDirective } from "./app-colors.directive";
 import { CreateHtmlDirective } from "./create-html.directive";
 import {MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from "@angular/material/button";
+import { StudentService } from "./services/student.service";
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators   } from "@angular/forms";
 
 
@@ -77,10 +78,16 @@ export class AppComponent {
 
   constructor(
     private router: Router, 
+    private _studentService: StudentService,
     private formBuilder: FormBuilder,
     private untypedFormBuilder: UntypedFormBuilder) {
     const { name, age } = this.person;
     let both = [...this.students, ...this.parents];
+
+
+    this._studentService.getStudents().subscribe((res) => {
+      console.log('STUDENTS JSON: ', res)
+    });  
 
     this.youtube.subscribe((res) => {
       console.log("SUSCRIBER 1: ", res);
