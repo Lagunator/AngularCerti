@@ -16,7 +16,7 @@ export class CityListComponent implements OnInit {
   searchQuery: string = '';
   errorMessage: string = '';
   maxLengthMessage: string = '';
-  maxCityNameLength = 20; 
+  maxCityNameLength = 20;
 
   constructor(private cityService: CityService) {}
 
@@ -25,18 +25,24 @@ export class CityListComponent implements OnInit {
   }
 
   async addCity() {
-  
-    if (this.newCityName.length > this.maxCityNameLength) {
-      this.maxLengthMessage = `City name cannot exceed ${this.maxCityNameLength} characters.`;
+    if (this.newCityName.trim() === '') {
+      this.errorMessage = 'City name cannot be empty!';
       return;
     }
+
+  
+    if (this.newCityName.trim().length > this.maxCityNameLength) {
+      this.maxLengthMessage = `City name is empty ${this.maxCityNameLength} characters.`;
+      return;
+    }
+
     this.maxLengthMessage = '';
+    this.errorMessage = '';
 
     const success = await this.cityService.addCity(this.newCityName.trim());
     if (success) {
       this.cities = await this.cityService.getCities();
       this.newCityName = '';
-      this.errorMessage = '';
     } else {
       this.errorMessage = 'City already exists!';
     }
