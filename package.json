@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "firebase:deploy": "ng build && firebase deploy",
-    "s3:deploy": "ng build && aws s3 sync ./dist/browser s3://angular-course-2024-project --profile rsoft-latam"
+    "s3:deploy": "ng build && aws s3 sync ./dist/browser s3://angulalaguna --profile Lagu"
   },
   "private": true,
   "dependencies": {
@@ -37,6 +37,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "tailwindcss": "^3.4.14",
     "typescript": "~5.5.2"
   }
 }

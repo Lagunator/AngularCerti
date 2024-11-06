@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "angular-course-2024-project"
-  }
+    "default": "angularcerti",
+    "angular": "angularcerti"
+  },
+  "targets": {},
+  "etags": {}
 }

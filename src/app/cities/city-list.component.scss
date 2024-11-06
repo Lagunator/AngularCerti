@@ -1,0 +1,110 @@
+$primary-color: #4CAF50;
+$primary-hover: #388E3C;
+$secondary-color: #C8E6C9;
+$error-color: #D32F2F;
+$font-color: #2E7D32;
+$box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+.city-list-container {
+  max-width: 700px; 
+  width: 100%; 
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+  background-color: #E8F5E9;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: $box-shadow;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.02);
+  }
+
+  h2 {
+    text-align: center;
+    color: $font-color;
+    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    width: 100%;
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+    }
+
+    .add-city-form,
+    .search-form {
+      display: flex;
+      flex: 1;
+      gap: 8px;
+
+      input[type="text"] {
+        flex: 1;
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid lighten($secondary-color, 10%);
+        border-radius: 8px;
+        box-shadow: inset $box-shadow;
+        transition: border-color 0.3s, box-shadow 0.3s;
+
+        &:focus {
+          border-color: $primary-color;
+          box-shadow: 0 0 5px rgba($primary-color, 0.5);
+          outline: none;
+        }
+      }
+
+      button {
+        padding: 10px 16px;
+        font-size: 1rem;
+        color: #fff;
+        background-color: $primary-color;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+
+        &:hover {
+          background-color: $primary-hover;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+
+  .error {
+    color: $error-color;
+    font-size: 0.9rem;
+    margin-top: 5px;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .city-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+      background-color: $secondary-color;
+      padding: 12px;
+      margin-bottom: 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, box-shadow 0.3s;
+      box-shadow: $box-shadow;
+
+      &:hover {
+        background-color: lighten($secondary-color, 10%);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+}
